@@ -1,0 +1,50 @@
+server:
+  port: 3344
+
+
+spring:
+  application:
+    name: tocc-config-center
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/      #为开发修改方便，暂时将配置文件放入 config center工程中
+#  开发较为成熟后,放入git 服务器中,以下为相关配置
+#    config:
+#      server:
+#        git:
+#          uri: http://10.25.111.24:30000/ChenZedong/transport-center-config.git #配置文件所在仓库,注意,此处必须以.git结尾
+#          username: chenzedong
+#          password: chenzedong
+#    label: master   #读取分支
+
+  #rabbitmq 相关配置
+  rabbitmq:
+    host: 10.25.111.113
+    port: 5672
+    username: admin
+    password: admin123
+
+# rabbitmq相关配置，暴露bus刷新配置的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
+
+eureka:
+  client:
+    #表示是否将自己注册进EurekaServer默认为true
+    register-with-eureka: true
+      #是否从EurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true，才是配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: config-center3344
+    prefer-ip-address: true  #访问路径显示IP
+

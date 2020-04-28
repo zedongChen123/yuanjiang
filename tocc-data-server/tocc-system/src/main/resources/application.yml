@@ -1,0 +1,100 @@
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8006
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+# 项目相关配置
+tocc:
+  # 名称
+  name: tocc
+  # 版本
+  version: 1.0.0
+  # 版权年份
+  copyrightYear: 2019
+  # 实例演示开关
+  demoEnabled: true
+  # 文件路径 示例（ Windows配置D:/checc/uploadPath，Linux配置 /home/checc/uploadPath）
+  profile: D:/checc/uploadPath
+  # 获取ip地址开关
+  addressEnabled: true
+
+# 日志配置
+logging:
+  level:
+    com.checc: debug
+    org.springframework: warn
+
+# Spring配置
+spring:
+  application:
+    name: tocc-system
+  profiles: 
+    active: druid
+  # 文件上传
+  servlet:
+     multipart:
+       # 单个文件大小
+       max-file-size:  10MB
+       # 设置总上传的文件大小
+       max-request-size:  20MB
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+    #表示是否将自己注册进EurekaServer默认为true
+    register-with-eureka: true
+    #是否从EurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true，才是配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: tocc-system8086
+    prefer-ip-address: true  #访问路径显示IP
+
+# token配置
+token:
+    # 令牌秘钥
+    secret: abcdefghijklmnopqrstuvwxyz
+    # 令牌有效期（默认30分钟）
+    expireTime: 30
+  
+# MyBatis配置
+mybatis:
+    # 搜索指定包别名
+    typeAliasesPackage: com.checc.system.domain
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath*:mybatis/**/*Mapper.xml
+    configuration:
+      cache-enabled: true    #全局映射器启用缓存
+      use-generated-keys: true  #允许 JDBC 支持自动生成主键
+      default-executor-type: reuse
+      map-underscore-to-camel-case: true  #驼峰式命名
+
+# PageHelper分页插件
+pagehelper: 
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql 
+
+# 防止XSS攻击
+xss: 
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice/*
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*
+  

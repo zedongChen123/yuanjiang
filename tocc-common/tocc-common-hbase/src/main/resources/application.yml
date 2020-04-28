@@ -1,0 +1,6 @@
+
+hbase:
+  zookeeper:
+    quorum: 10.25.111.113
+    property:
+      clientPort: 2181

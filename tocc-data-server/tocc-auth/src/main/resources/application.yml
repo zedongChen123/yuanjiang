@@ -1,0 +1,70 @@
+server:
+  port: 8005
+
+# token配置
+token:
+  # 令牌秘钥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime: 30
+
+spring:
+  application:
+    name: tocc-auth
+  profiles:
+    active: dev
+  messages:
+    # 国际化资源文件路径
+    basename: /i18n/messages
+
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/user_system_manager?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: zedongMySQL
+    password: 123456
+
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+    #表示是否将自己注册进EurekaServer默认为true
+    register-with-eureka: true
+      #是否从EurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true，才是配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: tocc-Auth-8005
+    prefer-ip-address: true  #访问路径显示IP
+
+feign:
+  hystrix:
+    enabled: true
+
+  # redis 配置
+  redis:
+    # 地址
+    host: localhost
+    # 端口，默认为6379
+    port: 6379
+    # 密码
+    password:
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+ribbon:
+  eureka:
+    enabled: true
