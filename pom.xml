@@ -35,7 +35,7 @@
     <mysql.version>5.1.47</mysql.version>
     <druid.version>1.1.16</druid.version>
     <bitwalker.version>1.19</bitwalker.version>
-    <commons.io.version>2.5</commons.io.version>
+    <commons.io.version>2.7</commons.io.version>
     <common-pool.version>2.6.2</common-pool.version>
     <jsoup.version>1.11.3</jsoup.version>
     <poi.version>3.17</poi.version>
