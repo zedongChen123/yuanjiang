@@ -37,7 +37,7 @@
     <bitwalker.version>1.19</bitwalker.version>
     <commons.io.version>2.5</commons.io.version>
     <common-pool.version>2.6.2</common-pool.version>
-    <jsoup.version>1.11.3</jsoup.version>
+    <jsoup.version>1.14.2</jsoup.version>
     <poi.version>3.17</poi.version>
     <jwt.version>0.9.0</jwt.version>
     <swagger.version>2.9.2</swagger.version>
